@@ -1,0 +1,12 @@
+[package]
+name = "burn"
+version = "0.1.0"
+authors = ["Filip Gospodinov <f@gospodinov.ch>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bitcoin = "0.23.0"
+hex = "0.4.2"
+structopt = "0.3.11"
