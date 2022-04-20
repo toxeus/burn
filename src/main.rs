@@ -32,7 +32,7 @@ fn main() {
             previous_output: bitcoin::OutPoint::new(args.txid, args.vout),
             script_sig: Default::default(),
             sequence: bitcoin::blockdata::constants::MAX_SEQUENCE,
-            witness: vec![],
+            witness: bitcoin::blockdata::witness::Witness::new(),
         }],
         output: vec![bitcoin::TxOut {
             script_pubkey: out_script,
