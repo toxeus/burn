@@ -27,11 +27,11 @@ fn main() {
         .into_script();
     let tx = bitcoin::Transaction {
         version: 1,
-        lock_time: 0,
+        lock_time: bitcoin::PackedLockTime(0),
         input: vec![bitcoin::TxIn {
             previous_output: bitcoin::OutPoint::new(args.txid, args.vout),
             script_sig: Default::default(),
-            sequence: bitcoin::blockdata::constants::MAX_SEQUENCE,
+            sequence: bitcoin::blockdata::transaction::Sequence::MAX,
             witness: bitcoin::blockdata::witness::Witness::new(),
         }],
         output: vec![bitcoin::TxOut {
