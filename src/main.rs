@@ -1,26 +1,19 @@
-use bitcoin::hashes::hex::FromHex;
-use structopt::StructOpt;
+use clap::Parser;
 
-#[derive(StructOpt)]
+#[derive(Parser)]
 struct CliArgs {
-    #[structopt(name = "OP_RETURN msg", short = "m", long = "msg", required = true)]
+    #[clap(name = "OP_RETURN msg", short = 'm', long = "msg", required = true)]
     opreturn_msg: String,
-    #[structopt(name = "amount in sat", short = "a", long = "amount", required = true)]
+    #[clap(name = "amount in sat", short = 'a', long = "amount", required = true)]
     amount: u64,
-    #[structopt(
-        name = "outpoint txid",
-        short = "t",
-        long = "txid",
-        parse(try_from_str = bitcoin::Txid::from_hex),
-        required = true,
-    )]
+    #[clap(name = "outpoint txid", short = 't', long = "txid", required = true)]
     txid: bitcoin::Txid,
-    #[structopt(name = "outpoint vout", short = "v", long = "vout", required = true)]
+    #[clap(name = "outpoint vout", short = 'v', long = "vout", required = true)]
     vout: u32,
 }
 
 fn main() {
-    let args = CliArgs::from_args();
+    let args = CliArgs::parse();
     let out_script = bitcoin::blockdata::script::Builder::new()
         .push_opcode(bitcoin::blockdata::opcodes::all::OP_RETURN)
         .push_slice(args.opreturn_msg.as_bytes())
