@@ -32,8 +32,5 @@ fn main() {
             value: args.amount,
         }],
     };
-    println!(
-        "{}",
-        hex::encode(bitcoin::consensus::encode::serialize(&tx))
-    );
+    println!("{}", bitcoin::consensus::encode::serialize_hex(&tx));
 }
