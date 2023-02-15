@@ -8,4 +8,4 @@ edition = "2018"
 
 [dependencies]
 bitcoin = "0.29.1"
-clap = { version = "4.1.1", features = [ "derive" ] }
+clap = { version = "4.1.6", features = [ "derive" ] }
