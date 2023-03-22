@@ -1,4 +1,5 @@
 use clap::Parser;
+use std::convert::TryInto;
 
 #[derive(Parser)]
 struct CliArgs {
@@ -16,11 +17,13 @@ fn main() {
     let args = CliArgs::parse();
     let out_script = bitcoin::blockdata::script::Builder::new()
         .push_opcode(bitcoin::blockdata::opcodes::all::OP_RETURN)
-        .push_slice(args.opreturn_msg.as_bytes())
+        .push_slice::<&bitcoin::blockdata::script::PushBytes>(
+            args.opreturn_msg.as_bytes().try_into().unwrap(),
+        )
         .into_script();
     let tx = bitcoin::Transaction {
         version: 1,
-        lock_time: bitcoin::PackedLockTime(0),
+        lock_time: bitcoin::absolute::LockTime::from_height(0).unwrap(),
         input: vec![bitcoin::TxIn {
             previous_output: bitcoin::OutPoint::new(args.txid, args.vout),
             script_sig: Default::default(),
