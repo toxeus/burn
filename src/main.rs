@@ -1,5 +1,4 @@
 use clap::Parser;
-use std::convert::TryInto;
 
 #[derive(Parser)]
 struct CliArgs {
