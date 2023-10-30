@@ -21,7 +21,7 @@ fn main() {
         )
         .into_script();
     let tx = bitcoin::Transaction {
-        version: 1,
+        version: bitcoin::transaction::Version::ONE,
         lock_time: bitcoin::absolute::LockTime::from_height(0).unwrap(),
         input: vec![bitcoin::TxIn {
             previous_output: bitcoin::OutPoint::new(args.txid, args.vout),
@@ -31,7 +31,7 @@ fn main() {
         }],
         output: vec![bitcoin::TxOut {
             script_pubkey: out_script,
-            value: args.amount,
+            value: bitcoin::Amount::from_sat(args.amount),
         }],
     };
     println!("{}", bitcoin::consensus::encode::serialize_hex(&tx));
