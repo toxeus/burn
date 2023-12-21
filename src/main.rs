@@ -25,7 +25,7 @@ fn main() {
         lock_time: bitcoin::absolute::LockTime::from_height(0).unwrap(),
         input: vec![bitcoin::TxIn {
             previous_output: bitcoin::OutPoint::new(args.txid, args.vout),
-            script_sig: Default::default(),
+            script_sig: bitcoin::ScriptBuf::new(),
             sequence: bitcoin::blockdata::transaction::Sequence::MAX,
             witness: bitcoin::blockdata::witness::Witness::new(),
         }],
